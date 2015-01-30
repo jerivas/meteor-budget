@@ -1,5 +1,6 @@
 Router.configure({
-  layoutTemplate: 'baseLayout',
+  layoutTemplate: "baseLayout",
+  notFoundTemplate: "notFound",
   waitOn: function () {
     return [
       Meteor.subscribe("budgets"),
@@ -8,5 +9,9 @@ Router.configure({
   }
 });
 
-AccountsTemplates.configureRoute('signIn');
-AccountsTemplates.configureRoute('signUp');
+AccountsTemplates.configureRoute("signIn", {
+	redirect: "budgets",
+});
+AccountsTemplates.configureRoute("signUp", {
+	redirect: "budgets",
+});
