@@ -13,7 +13,7 @@
 			</div>
 			{{!-- Budget list --}}
 			{{#each budgets}}
-				<a href="{{pathFor 'budgetDashboard'}}" class="{{routeEq "_id" _id}} item">
+				<a href="{{pathFor 'budgetDashboard'}}" class="{{routeEq "_id" _id "active blue"}} item">
 					<div class="ui {{colorByNumber balance}} label">{{formatMoney balance}}</div>
 					{{title}}
 				</a>
