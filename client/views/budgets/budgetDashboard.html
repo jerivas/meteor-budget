@@ -1,4 +1,15 @@
 <template name="budgetDashboard">
+	{{!-- Public budgets message --}}
+	{{#unless currentUser}}
+	<div class="center aligned sixteen wide column">
+		<div class="ui info message">
+			<div class="header">
+				<i class="info circle icon"></i>
+				You're viewing public budgets. <a href="{{pathFor 'atSignIn'}}">Sign in</a> or <a href="{{pathFor 'atSignUp'}}">sign up</a> to view your own private budgets.
+			</div>
+		</div>
+	</div>
+	{{/unless}}
 	{{!-- Budget sidebar --}}
 	<div class="six wide column">
 		<div class="ui large vertical fluid menu">
