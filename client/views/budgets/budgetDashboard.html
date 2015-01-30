@@ -1,0 +1,87 @@
+<template name="budgetDashboard">
+	{{!-- Budget sidebar --}}
+	<div class="six wide column">
+		<div class="ui large vertical fluid menu">
+			<div class="item">
+			{{!-- New Budget --}}
+				<form id="newBudget">
+					<div class="ui fluid icon input">
+						<input type="text" placeholder="New budget" name="title" required="required">
+						<i class="money icon"></i>
+					</div>
+				</form>
+			</div>
+			{{!-- Budget list --}}
+			{{#each budgets}}
+				<a href="{{pathFor 'budgetDashboard'}}" class="{{routeEq "_id" _id}} item">
+					<div class="ui {{colorByNumber balance}} label">{{formatMoney balance}}</div>
+					{{title}}
+				</a>
+			{{/each}}
+		</div>
+	</div>
+
+	{{!-- Current Budget detail --}}
+	<div class="ten wide column">
+	{{!-- Render dashboard only if a budget exists --}}
+	{{#if title}}
+	{{!-- Tab navigation --}}
+		<div id="budgetTabs" class="ui top attached tabular menu">
+			<a id="transactionsTab" class="active item">
+				<i class="list layout icon"></i>
+				Transactions
+			</a>
+			<a id="statsTab" class="item" onclick="javascript:alert('Coming soon!')">
+				<i class="bar chart icon"></i>
+				Stats
+			</a>
+		</div>
+		{{!-- Transactions --}}
+		<div class="ui bottom attached segment">
+			<h1 id="budgetTitle" class="ui header">
+				{{title}}
+				<div class="{{colorByNumber balance}} sub header">{{formatMoney balance}}</div>
+			</h1>
+			<a id="removeBudget" class="ui top right attached label">
+				<i class="remove circle icon"></i>Delete budget
+			</a>
+			{{!-- New Transaction --}}
+			<h3 class="ui header">Add transaction</h3>
+			<form id="newTransaction" class="ui form">
+				<div class="four fields">
+					<div class="field">
+						<input type="text" placeholder="Title" name="title" required="required">
+					</div>
+					<div class="field">
+						<input type="number" placeholder="$" name="amount" required="required">
+					</div>
+					<div class="field">
+						<input type="date" placeholder="YYYY-MM-DD" name="date">
+					</div>
+					<div class="field">
+						<button type="submit" class="ui fluid primary button">
+							<i class="add square icon"></i>Add
+						</button>
+					</div>
+				</div>
+			</form>
+			{{!-- Transaction history --}}
+			{{#if transactionCount}}
+			<h3 class="ui header">Transaction history</h3>
+			<div id="transactionHistory" class="ui divided selection items">
+			{{#each transactions}}
+				{{> transactionItem}}
+			{{/each}}
+			</div>
+			{{/if}}
+		</div>
+
+	{{else}}
+	<div class="ui segment">
+		<h1 class="ui header">No budgets yet!
+			<div class="sub header">Add one and take control of your finances :)</div>
+		</h1>
+	</div>
+	{{/if}}
+	</div>
+</template>

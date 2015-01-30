@@ -3,30 +3,39 @@ Transactions = new Mongo.Collection('transactions');
 Transactions.attachSchema(
     new SimpleSchema({
     title: {
-      type: String
+      type: String,
+      max: 100
     },
-    content: {
-      type: String
+    amount: {
+      type: Number,
+      decimal: true
     },
     createdAt: {
-      type: Date,
-      denyUpdate: true
+      type: Date
+    },
+    budgetId: {
+      type: String
+    },
+    ownerId: {
+      type: String,
+      optional: true
     }
   })
 );
 
-// Collection2 already does schema checking
-// Add custom permission rules if needed
-if (Meteor.isServer) {
-  Transactions.allow({
-    insert : function () {
-      return true;
-    },
-    update : function () {
-      return true;
-    },
-    remove : function () {
-      return true;
-    }
-  });
-}
+Meteor.methods({
+  addTransaction: function (transaction) {
+    Transactions.insert(transaction);
+    Budgets.update(transaction.budgetId, {$inc: {
+      transactionCount: 1,
+      balance: parseFloat(transaction.amount)
+    }});
+  },
+  removeTransaction: function (transaction) {
+    Budgets.update(transaction.budgetId, {$inc: {
+      transactionCount: -1,
+      balance: -parseFloat(transaction.amount)
+    }});
+    Transactions.remove({_id: transaction._id});
+  }
+});

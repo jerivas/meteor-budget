@@ -1,3 +1,3 @@
 Meteor.publish('transactions', function () {
-  return Transactions.find();
+  return Transactions.find({ownerId: this.userId});
 });

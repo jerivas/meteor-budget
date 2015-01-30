@@ -1,3 +1,3 @@
 Meteor.publish('budgets', function () {
-  return Budgets.find();
+  return Budgets.find({ownerId: this.userId});
 });

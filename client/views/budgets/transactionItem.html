@@ -1,0 +1,16 @@
+<template name="transactionItem">
+	<div class="item">
+		<div class="content">
+			<div class="right floated">
+				<button class="ui circular negative mini icon button"><i class="remove icon"></i></button>
+			</div>
+			<div class="header">{{title}}</div>
+			<div class="description">
+				<div class="ui {{colorByNumber amount}} horizontal label">
+					{{formatMoney amount}}
+				</div>
+				{{calendar createdAt}}
+			</div>
+		</div>
+	</div>
+</template>

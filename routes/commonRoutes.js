@@ -1,3 +1,3 @@
-Router.route('/', function () {
-  this.render('common');
+Router.route("/", {
+  name: "home"
 });
