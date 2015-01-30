@@ -7,6 +7,12 @@ Router.route("/budgets", {
     } else {
       this.render("budgetDashboard");
     }
+  },
+  onAfterAction: function () {
+    if (!Meteor.isClient) {
+      return;
+    }
+    SEO.set({title: "Create a budget - " + Meteor.App.NAME});
   }
 });
 Router.route("/budgets/:_id", {
@@ -16,5 +22,14 @@ Router.route("/budgets/:_id", {
   },
   action: function () {
     this.render();
+  },
+  onAfterAction: function () {
+    if (!Meteor.isClient) {
+      return;
+    }
+    var budget = this.data();
+    if (budget) {
+      SEO.set({title: budget.title + " - " + Meteor.App.NAME});
+    }
   }
 });
