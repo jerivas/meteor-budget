@@ -4,7 +4,7 @@
 
 <template name="baseLayout">
 	<div class="ui large menu">
-		<a href="/" class="item">Meteor budget</a>
+		<a id="brand" href="/" class="item">Meteor budget</a>
 		<div class="right menu">
 			{{#if currentUser}}
 			<div class="item"><i class="icon user"></i>{{currentUser.emails.[0].address}}</div>
@@ -17,4 +17,20 @@
 			{{> yield }}
 		</div>
 	</section>
+	<footer id="footer" class="ui two column stackable page grid">
+		<div id="credits" class="column">
+			<p>Meteor Budget by <a href="https://github.com/jerivas" target="_blank">JE Rivas</a>. Powered by <a href="http://meteor.com" target="_blank">Meteor</a>.</p>
+		</div>
+		<div id="links" class="column">
+			<a href="https://twitter.com/je92rivas" target="_blank">
+				<i class="large twitter square icon"></i>
+			</a>
+			<a href="https://github.com/jerivas" target="_blank">
+				<i class="large github square icon"></i>
+			</a>
+			<a href="http://jerivas.com" target="_blank">
+				<i class="large browser icon"></i>
+			</a>
+		</div>
+	</footer>
 </template>
