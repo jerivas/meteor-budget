@@ -23,8 +23,11 @@ Transactions.attachSchema(
   })
 );
 
+// We're being lax with check() here because SimpleSchema
+// does the validation.
 Meteor.methods({
   addTransaction: function (transaction) {
+    check(transaction, Object);
     Transactions.insert(transaction);
     Budgets.update(transaction.budgetId, {$inc: {
       transactionCount: 1,
@@ -32,6 +35,7 @@ Meteor.methods({
     }});
   },
   removeTransaction: function (transaction) {
+    check(transaction, Object);
     Budgets.update(transaction.budgetId, {$inc: {
       transactionCount: -1,
       balance: -parseFloat(transaction.amount)
