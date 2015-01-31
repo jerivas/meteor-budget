@@ -1,7 +1,20 @@
 <template name="home">
-	<div class="sixteen wide column">
-		<h1>Hello!</h1>
-		<p>This app will let you track your money!</p>
-		<a href="{{pathFor 'budgets'}}">Pick a budget</a>
+	<div id="homeWrapper">
+		<div class="sixteen wide center aligned column">
+			<h1 class="ui icon header">
+				<i class="money icon"></i>
+				<div class="content">
+					Meteor budget
+					<div class="sub header">
+						Start tracking your money now
+					</div>
+				</div>
+			</h1>
+		</div>
+		<div class="sixteen wide center aligned column">
+			<a class="big primary ui button" href="{{pathFor 'budgets'}}">
+				Go to budgets
+			</a>
+		</div>
 	</div>
 </template>
