@@ -29,6 +29,12 @@
 					{{title}}
 				</a>
 			{{/each}}
+			<div class="header item">
+				<strong><em>Balance</em></strong>
+				<div class="ui {{colorByNumber currentUser.profile.balance}} label">
+					{{formatMoney currentUser.profile.balance}}
+				</div>
+			</div>
 		</div>
 		<div class="ui yellow center aligned segment">
 			<p><strong>Pro tip:</strong> Leave the date of a Transaction blank and it will be saved with today's date and time.</p>
