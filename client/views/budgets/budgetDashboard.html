@@ -29,12 +29,15 @@
 					{{title}}
 				</a>
 			{{/each}}
+			{{!-- Account balance --}}
+			{{#if currentUser}}
 			<div class="header item">
 				<strong><em>Balance</em></strong>
 				<div class="ui large {{colorByNumber currentUser.profile.balance}} label">
 					{{formatMoney currentUser.profile.balance}}
 				</div>
 			</div>
+			{{/if}}
 		</div>
 		{{!-- Pro tip --}}
 		<div class="ui yellow center aligned segment">
