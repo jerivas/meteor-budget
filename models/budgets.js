@@ -41,6 +41,9 @@ Meteor.methods({
     check(redirect, Match.Optional(String));
     Transactions.remove({budgetId: budget._id});
     Budgets.remove({_id: budget._id});
+    Meteor.users.update(this.userId, {$inc: {
+      "profile.balance": -budget.balance
+    }});
     if (redirect && Meteor.isClient) {
       Router.go(redirect);
     }

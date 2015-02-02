@@ -33,13 +33,19 @@ Meteor.methods({
       transactionCount: 1,
       balance: parseFloat(transaction.amount)
     }});
+    Meteor.users.update(this.userId, {$inc: {
+      "profile.balance": parseFloat(transaction.amount)
+    }});
   },
   removeTransaction: function (transaction) {
     check(transaction, Object);
+    Transactions.remove({_id: transaction._id});
     Budgets.update(transaction.budgetId, {$inc: {
       transactionCount: -1,
       balance: -parseFloat(transaction.amount)
     }});
-    Transactions.remove({_id: transaction._id});
+    Meteor.users.update(this.userId, {$inc: {
+      "profile.balance": -parseFloat(transaction.amount)
+    }});
   }
 });
